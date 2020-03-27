@@ -31,7 +31,11 @@ function estConnecte()
  */
 function estComptable()
 {
-    return $_SESSION['type'] == 'comptable';
+    if (estConnecte()) {
+        return $_SESSION['type'] == 'comptable';
+    } else {
+        return false;
+    }
 }
 
 /**
