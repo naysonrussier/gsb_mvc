@@ -53,33 +53,33 @@
                             <?php
                             if (!$estComptable) {
                                 ?>
-                            <li <?php if ($uc == 'gererFrais') { ?>class="active"<?php } ?>>
-                                <a href="index.php?uc=gererFrais&action=saisirFrais">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                    Renseigner la fiche de frais
-                                </a>
-                            </li>
-                            <li <?php if ($uc == 'etatFrais') { ?>class="active"<?php } ?>>
-                                <a href="index.php?uc=etatFrais&action=selectionnerMois">
-                                    <span class="glyphicon glyphicon-list-alt"></span>
-                                    Afficher mes fiches de frais
-                                </a>
-                            </li>
+                                <li <?php if ($uc == 'gererFrais') { ?>class="active"<?php } ?>>
+                                    <a href="index.php?uc=gererFrais&action=saisirFrais">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                        Renseigner la fiche de frais
+                                    </a>
+                                </li>
+                                <li <?php if ($uc == 'etatFrais') { ?>class="active"<?php } ?>>
+                                    <a href="index.php?uc=etatFrais&action=selectionnerMois">
+                                        <span class="glyphicon glyphicon-list-alt"></span>
+                                        Afficher mes fiches de frais
+                                    </a>
+                                </li>
                             <?php
                                 } else {
                                 ?>
-                            <li <?php if ($uc == 'validerFrais') { ?>class="active"<?php } ?>>
-                                <a href="index.php?uc=validerFrais">
-                                    <span class="glyphicon glyphicon-check"></span>
-                                    Valider les fiches de frais
-                                </a>
-                            </li>
-                            <li <?php if ($uc == 'paiementFrais') { ?>class="active"<?php } ?>>
-                                <a href="index.php?uc=paiementFrais">
-                                    <span class="glyphicon glyphicon-euro"></span>
-                                    Suivre le paiement des fiches de frais
-                                </a>
-                            </li>
+                                <li <?php if ($uc == 'validerFrais') { ?>class="active"<?php } ?>>
+                                    <a href="index.php?uc=validerFrais">
+                                        <span class="glyphicon glyphicon-check"></span>
+                                        Valider les fiches de frais
+                                    </a>
+                                </li>
+                                <li <?php if ($uc == 'paiementFrais') { ?>class="active"<?php } ?>>
+                                    <a href="index.php?uc=paiementFrais">
+                                        <span class="glyphicon glyphicon-euro"></span>
+                                        Suivre le paiement des fiches de frais
+                                    </a>
+                                </li>
                             <?php
                                 }
                                 ?>

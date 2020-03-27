@@ -16,10 +16,9 @@
 ?>
 <hr>
 <div class="row comptable_hf">
-    <div class="panel">
+    <div class="panel panel-comptable">
         <div class="panel-heading">Descriptif des éléments hors forfait</div>
-        <div class="container">
-            <div class="row table-header">
+            <div class="table-header">
                 <div class="col-sm-3">Date</div>
                 <div class="col-sm-3">Libellé</div>
                 <div class="col-sm-3">Montant</div>
@@ -33,9 +32,8 @@
                 $id = $unFraisHorsForfait['id'];
                 ?>  
                 <form method="post" 
-                      action="index.php?uc=validerFrais&action=validerMajFraisHorsForfait&
-                        lstMois=<?php echo $mois ?>&lstVisiteur=<?php echo $idVisiteur ?>" 
-                      role="form" class="row">
+                    action="index.php?uc=validerFrais&action=validerMajFraisHorsForfait&lstMois=<?php 
+                        echo $mois ?>&lstVisiteur=<?php echo $idVisiteur ?>" role="form">
 
                         <div class="col-sm-3"><input name='dateFrais' class='form-control' value='<?php echo $date ?>'></div>
                         <div class="col-sm-3"><input name='libelle' class='form-control' value='<?php echo $libelle ?>'></div>
@@ -51,6 +49,5 @@
                 <?php
             }
             ?>
-        </div>
     </div>
 </div>

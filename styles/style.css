@@ -14,11 +14,11 @@
     color: #ff9600;
 }
 /* Hors forfait panel */
-.container.comptable .comptable_hf .panel {
+.panel.panel-comptable {
     overflow: hidden;
-    border: none;
+    border-color: #ff9600;
 }
-.container.comptable .comptable_hf .panel-heading {
+.panel-comptable .panel-heading {
     background: #ff9600;
     color: #fff;
 }
