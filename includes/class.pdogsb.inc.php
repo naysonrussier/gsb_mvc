@@ -413,6 +413,36 @@ class PdoGsb
     }
 
     /**
+     * Modifier un frais hors forfait pour un visiteur un mois donné
+     * à partir des informations fournies en paramètre
+     *
+     * @param Integer $id        Id du frais
+     * @param String $libelle    Libellé du frais
+     * @param String $date       Date du frais au format français jj//mm/aaaa
+     * @param Float  $montant    Montant du frais
+     *
+     * @return null
+     */
+    public function modifierFraisHorsForfait(
+        $id,
+        $libelle,
+        $date,
+        $montant
+    ) {
+        $dateFr = dateFrancaisVersAnglais($date);
+        $requetePrepare = PdoGSB::$monPdo->prepare(
+            'UPDATE lignefraishorsforfait SET libelle=:unLibelle, date=:uneDateFr, '
+            . 'montant=:unMontant '
+            . 'WHERE id=:unId'
+        );
+        $requetePrepare->bindParam(':unLibelle', $libelle, PDO::PARAM_STR);
+        $requetePrepare->bindParam(':uneDateFr', $dateFr, PDO::PARAM_STR);
+        $requetePrepare->bindParam(':unMontant', $montant, PDO::PARAM_INT);
+        $requetePrepare->bindParam(':unId', $id, PDO::PARAM_INT);
+        $requetePrepare->execute();
+    }
+
+    /**
      * Supprime le frais hors forfait dont l'id est passé en argument
      *
      * @param String $idFrais ID du frais
@@ -458,6 +488,22 @@ class PdoGsb
             );
         }
         return $lesMois;
+    }
+    
+    /**
+     * Retourne l'ensemble des visiteurs disponible qui possède au moins
+     * une fiche de frais
+     * 
+     * @return id, nom et prénom sous forme de tableau associatif
+     */
+    public function getLesVisiteurs() {
+        $requetePrepare = PdoGsb::$monPdo->prepare(
+            'SELECT id AS id, nom AS nom, prenom AS prenom '
+            . 'FROM visiteur '
+            . 'WHERE (SELECT COUNT(*) FROM fichefrais WHERE idvisiteur=id) > 0'
+        );
+        $requetePrepare->execute();
+        return $requetePrepare->fetchAll();
     }
 
     /**

@@ -30,7 +30,7 @@ class fctTest extends TestCase {
      * @covers estConnecte
      */
     public function testPersistenceConnexion() {
-        connecter($this->visiteurId, $this->visiteurNom, $this->visiteurPrenom);
+        connecter($this->visiteurId, $this->visiteurNom, $this->visiteurPrenom, 'visiteur');
         $this->assertTrue(estConnecte());
     }
     

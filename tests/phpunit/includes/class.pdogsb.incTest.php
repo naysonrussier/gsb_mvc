@@ -39,12 +39,13 @@ class PdoGsbTest extends TestCase {
     }
     
     /**
-     * Tester la récupération d'info d'un visiteur, d'après nom d'utilisateur et mot de passe
+     * Tester la récupération d'info d'un visiteur / comptable, d'après nom d'utilisateur et mot de passe
      * @covers PdoBsb::GetInfoVisiteur
      */
-    public function testGetInfoVisiteur() {
-        $visiteur = $this->object->getInfosVisiteur($this->visiteurLogin, $this->visiteurMdp);
+    public function testGetInfoUtilisateur() {
+        $visiteur = $this->object->getInfosUtilisateur($this->visiteurLogin, $this->visiteurMdp);
         $this->assertTrue(is_array($visiteur), "Utilisateur ou mdp erroné");
         $this->assertEquals($visiteur['id'], $this->visiteurId, "L'utilisateur trouvé ne correspond pas à l'id recherché.");
+        $this->assertEquals($visiteur['type'], 'visiteur', "L'utilisateur trouvé ne correspond pas à l'id recherché.");
     }
 }

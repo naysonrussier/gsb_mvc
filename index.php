@@ -52,7 +52,7 @@ switch ($uc) {
         } elseif ($_SESSION['type'] == 'comptable') {
             switch ($uc) {
                 case 'validerFrais':
-                    include 'controleurs/c_validerFrais.php';
+                    include 'controleurs/compta/c_validerFrais.php';
                     break;
             }
         }
