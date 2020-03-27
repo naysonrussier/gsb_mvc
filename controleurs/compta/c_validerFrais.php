@@ -53,8 +53,12 @@ case 'validerMajFraisHorsForfait':
     }
     break;
 case 'validerMajNbJustificatifs':
+    $nbJustificatifs = filter_input(INPUT_POST, 'nbJustificatifs', FILTER_SANITIZE_NUMBER_INT);
+    $pdo->majNbJustificatifs($idVisiteur,$mois, $nbJustificatifs);
 }
 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
 $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $mois);
+$nbJustificatifs = $pdo->getNbjustificatifs($idVisiteur, $mois);
 require 'vues/compta/v_listeFraisForfait.php';
 require 'vues/compta/v_listeFraisHorsForfait.php';
+require 'vues/compta/v_nbjustificatifs.php';
