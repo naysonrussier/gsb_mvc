@@ -25,16 +25,17 @@ case 'demandeConnexion':
 case 'valideConnexion':
     $login = filter_input(INPUT_POST, 'login', FILTER_SANITIZE_STRING);
     $mdp = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_STRING);
-    $visiteur = $pdo->getInfosVisiteur($login, $mdp);
-    if (!is_array($visiteur)) {
+    $utilisateur = $pdo->getInfosUtilisateur($login, $mdp);
+    if (!is_array($utilisateur)) {
         ajouterErreur('Login ou mot de passe incorrect');
         include 'vues/v_erreurs.php';
         include 'vues/v_connexion.php';
     } else {
-        $id = $visiteur['id'];
-        $nom = $visiteur['nom'];
-        $prenom = $visiteur['prenom'];
-        connecter($id, $nom, $prenom);
+        $id = $utilisateur['id'];
+        $nom = $utilisateur['nom'];
+        $prenom = $utilisateur['prenom'];
+        $type = $utilisateur['type'];
+        connecter($id, $nom, $prenom, $type);
         header('Location: index.php');
     }
     break;
