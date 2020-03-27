@@ -25,6 +25,16 @@ function estConnecte()
 }
 
 /**
+ * Teste si l'utilisateur est comptable
+ * 
+ * @return vrai ou faux
+ */
+function estComptable()
+{
+    return $_SESSION['type'] == 'comptable';
+}
+
+/**
  * Enregistre dans une variable session les infos d'un visiteur
  *
  * @param String $idVisiteur ID du visiteur

@@ -19,8 +19,10 @@ require_once 'includes/class.pdogsb.inc.php';
 session_start();
 $pdo = PdoGsb::getPdoGsb();
 $estConnecte = estConnecte();
+$estComptable = estComptable();
 $uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_STRING);
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
+
 require 'vues/v_entete.php';
 if ($uc && !$estConnecte) {
     $uc = 'connexion';
