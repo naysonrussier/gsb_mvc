@@ -19,7 +19,7 @@
  * Fonction qui retourne la liste des visiteurs
  *
  * @param PDO $pdo instance de la classe PDO utilisée pour se connecter
- *
+ * 
  * @return Array de visiteurs
  */
 function getLesVisiteurs($pdo)
