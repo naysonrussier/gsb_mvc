@@ -1,3 +1,34 @@
 .header {
     margin-top: 10px;
 }
+
+/* Page comptable, couleur Orange*/
+.container.comptable .nav a {
+    color: #ff9600;
+}
+.container.comptable .nav li.active a {
+    background: #ff9600;
+    color: #fff;
+}
+.container.comptable h2 {
+    color: #ff9600;
+}
+/* Hors forfait panel */
+.container.comptable .comptable_hf .panel {
+    overflow: hidden;
+    border: none;
+}
+.container.comptable .comptable_hf .panel-heading {
+    background: #ff9600;
+    color: #fff;
+}
+.container.comptable .comptable_hf .table-header div {
+    font-weight: bold;
+    padding: 10px 7px;
+    border: 1px solid #ff9600;
+    background: #ff960011;
+}
+.container.comptable .comptable_hf form div {
+    padding: 10px 7px;
+    border: 1px solid #ff9600;
+}

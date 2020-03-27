@@ -28,7 +28,7 @@
         <link href="./styles/style.css" rel="stylesheet">
     </head>
     <body>
-        <div class="container">
+        <div class="container<?php if ($estComptable) { echo ' comptable'; } ?>">
             <?php
             if ($estConnecte) {
                 ?>

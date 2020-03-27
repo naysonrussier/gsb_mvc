@@ -15,12 +15,12 @@
  */
 ?>
 <hr>
-<div class="row">
-    <div class="panel panel-info">
+<div class="row comptable_hf">
+    <div class="panel">
         <div class="panel-heading">Descriptif des éléments hors forfait</div>
         <div class="container">
-            <div class="row">
-                <div class="col-sm-3 text-center">Date</div>
+            <div class="row table-header">
+                <div class="col-sm-3">Date</div>
                 <div class="col-sm-3">Libellé</div>
                 <div class="col-sm-3">Montant</div>
                 <div class="col-sm-3">&nbsp;</div>
