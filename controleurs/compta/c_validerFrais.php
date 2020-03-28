@@ -55,7 +55,7 @@ case 'validerMajFraisHorsForfait':
         if (nbErreurs() != 0) {
             include 'vues/v_erreurs.php';
         } else {
-            $pdo->modifierFraisHorsForfait(
+            $pdo->majFraisHorsForfait(
                 $id,
                 $libelle,
                 $dateFrais,
