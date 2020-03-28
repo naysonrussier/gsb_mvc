@@ -56,6 +56,9 @@ switch ($uc) {
                 case 'validerFrais':
                     include 'controleurs/compta/c_validerFrais.php';
                     break;
+                case 'paiementFrais':
+                    include 'controleurs/compta/c_paiementFrais.php';
+                    break;
             }
         }
 }
