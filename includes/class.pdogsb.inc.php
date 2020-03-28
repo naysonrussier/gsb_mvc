@@ -160,6 +160,36 @@ class PdoGsb
         }
         return $lesLignes;
     }
+    
+    /**
+     * Retourne sous forme d'un tableau associatif la ligne de frais
+     * hors forfait concernée par l'id passé en argument.
+     * La boucle foreach ne peut être utilisée ici car on procède
+     * à une modification de la structure itérée - transformation du champ date-
+     *
+     * @param String $idVisiteur ID du visiteur
+     * @param String $mois       Mois sous la forme aaaamm
+     *
+     * @return tous les champs de la lignes de frais hors forfait sous la forme
+     * d'un tableau associatif
+     */
+    public function getUnFraisHorsForfait($idFrais)
+    {
+        $requetePrepare = PdoGsb::$monPdo->prepare(
+            'SELECT * FROM lignefraishorsforfait '
+            . 'WHERE lignefraishorsforfait.id = :unId'
+        );
+        $requetePrepare->bindParam(':unId', $idFrais, PDO::PARAM_INT);
+        $requetePrepare->execute();
+        $lesLignes = $requetePrepare->fetchAll();
+        if (count($lesLignes) > 0) {
+            $date = $lesLignes[0]['date'];
+            $lesLignes[0]['date'] = dateAnglaisVersFrancais($date);
+            return $lesLignes[0];
+        } else{
+            return null;
+        }
+    }
 
     /**
      * Retourne le nombre de justificatif d'un visiteur pour un mois donné

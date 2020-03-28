@@ -53,10 +53,10 @@
                             </button>
                             <a class='btn btn-danger' href='<?php
                                 echo 'index.php?uc=validerFrais'
-                                . '&action=supprimerFraisHorsFofrait&idFrais=' . $id
+                                . '&action=refusFraisHorsFofrait&idFrais=' . $id
                                 . '&visiteur=' . $idVisiteur . '&mois=' . $mois;
-                            ?>' onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">
-                                <span class="glyphicon glyphicon-trash"></span>
+                            ?>' onclick="return confirm('Voulez-vous vraiment refuser ce frais?');">
+                                <span class="glyphicon glyphicon-remove"></span> Refus
                             </a>
                             <a class='btn btn-warning' href='<?php
                                 echo 'index.php?uc=validerFrais'

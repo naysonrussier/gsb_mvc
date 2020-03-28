@@ -62,12 +62,42 @@ case 'validerMajFraisHorsForfait':
         }
     }
     break;
-case 'supprimerFraisHorsFofrait':
+case 'refusFraisHorsFofrait':
     $idFrais = filter_input(INPUT_GET, 'idFrais', FILTER_SANITIZE_NUMBER_INT);
     $idVisiteur = filter_input(INPUT_GET, 'visiteur', FILTER_SANITIZE_STRING);
     $mois = filter_input(INPUT_GET, 'mois', FILTER_SANITIZE_STRING);
+    
+    // récupération et maj du frais actuel
+    $frais = $pdo->getUnFraisHorsForfait($idFrais);
+    $libelle = 'REFUSE : ' . $frais['libelle'];
+    $date = $frais['date'];
+    $montant = $frais['montant'];
+    $pdo->modifierFraisHorsForfait($idFrais, $libelle, $date, $montant);
+    
+    $succes = 'Frais hors forfait refusé avec succés.';
+    include 'vues/v_succes.php';
+    break;
+case 'reporterFraisHorsFofrait':
+    $idFrais = filter_input(INPUT_GET, 'idFrais', FILTER_SANITIZE_NUMBER_INT);
+    $idVisiteur = filter_input(INPUT_GET, 'visiteur', FILTER_SANITIZE_STRING);
+    $mois = filter_input(INPUT_GET, 'mois', FILTER_SANITIZE_STRING);
+    
+    // Création du mois suivant
+    $moisSuivant= getMoisSuivant($mois);
+    if ($pdo->estPremierFraisMois($idVisiteur, $moisSuivant)) {
+        $pdo->creeNouvellesLignesFrais($idVisiteur, $moisSuivant);
+    }
+    
+    // récupération et maj du frais actuel
+    $frais = $pdo->getUnFraisHorsForfait($idFrais);
+    $libelle = $frais['libelle'];
+    $date = $frais['date'];
+    $montant = $frais['montant'];
+    $pdo->creeNouveauFraisHorsForfait($idVisiteur, $moisSuivant, $libelle,  $date, $montant);
+    
+    // suppression de l'ancien frais
     $pdo->supprimerFraisHorsForfait($idFrais);
-    $succes = 'Frais hors forfait supprimé avec succés.';
+    $succes = 'Frais hors forfait reporté avec succés.';
     include 'vues/v_succes.php';
     break;
 case 'validerMajNbJustificatifs':
