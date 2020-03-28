@@ -14,7 +14,7 @@
 ?>
 <div class="row">
     <div class="col-md-4">
-        <form action="index.php?uc=validerFrais&action=validerMajNbJustificatifs&lstMois=<?php echo $mois ?>&lstVisiteur=<?php echo $idVisiteur ?>" 
+        <form action="index.php?uc=validerFrais&action=validerMajNbJustificatifs" 
               method="post" role="form">
             <fieldset> 
                 <div class="form-group">
@@ -24,6 +24,8 @@
                            value="<?php echo $nbJustificatifs ?>" 
                            class="form-control">
                 </div>
+                <input type='hidden' value='<?php echo $mois ?>' name='mois'>
+                <input type='hidden' value='<?php echo $idVisiteur ?>' name='visiteur'>
                 <button class="btn btn-success" type="submit">Ajouter</button>
                 <button class="btn btn-danger" type="reset">Effacer</button>
             </fieldset>

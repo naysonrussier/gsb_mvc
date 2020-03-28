@@ -48,8 +48,23 @@
                             <input type='hidden' value='<?php echo $id ?>' name='id'>
                             <input type='hidden' value='<?php echo $mois ?>' name='mois'>
                             <input type='hidden' value='<?php echo $idVisiteur ?>' name='visiteur'>
-                            <input type='submit' class='btn btn-success' value='Corriger'>
-                            <input type='reset' class='btn btn-danger' value='Réinitialiser'>
+                            <button type='submit' class='btn btn-success'>
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                            <a class='btn btn-danger' href='<?php
+                                echo 'index.php?uc=validerFrais'
+                                . '&action=supprimerFraisHorsFofrait&idFrais=' . $id
+                                . '&visiteur=' . $idVisiteur . '&mois=' . $mois;
+                            ?>' onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                            <a class='btn btn-warning' href='<?php
+                                echo 'index.php?uc=validerFrais'
+                                . '&action=reporterFraisHorsFofrait&idFrais=' . $id
+                                . '&visiteur=' . $idVisiteur . '&mois=' . $mois;
+                            ?>' onclick="return confirm('Voulez-vous vraiment reporter ce frais?');">
+                                <span class="glyphicon glyphicon-share-alt"></span> Report
+                            </a>
                         </div>
 
                 </form>
