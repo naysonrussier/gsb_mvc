@@ -17,8 +17,18 @@
     background: #ff9600;
     color: #fff;
 }
+.container.comptable .nav li.active a:hover {
+    background: #e78800;
+}
 .container.comptable h2 {
     color: #ff9600;
+}
+.container.comptable .btn-primary {
+    background: #ff9600;
+    border-color: #e78800;
+}
+.container.comptable .btn-primary:hover {
+    background: #e78800;
 }
 /* Hors forfait panel */
 .panel.panel-comptable {
