@@ -19,7 +19,7 @@
     <h3>Eléments forfaitisés</h3>
     <div class="col-md-4">
         <form method="post" 
-              action="index.php?uc=validerFrais&action=validerMajFraisForfait&lstMois=<?php echo $mois ?>&lstVisiteur=<?php echo $idVisiteur ?>" 
+              action="index.php?uc=validerFrais&action=validerMajFraisForfait" 
               role="form">
             <fieldset>       
                 <?php
@@ -38,6 +38,8 @@
                     <?php
                 }
                 ?>
+                <input type='hidden' value='<?php echo $mois ?>' name='mois'>
+                <input type='hidden' value='<?php echo $idVisiteur ?>' name='visiteur'>
                 <button class="btn btn-success" type="submit">Ajouter</button>
                 <button class="btn btn-danger" type="reset">Effacer</button>
             </fieldset>

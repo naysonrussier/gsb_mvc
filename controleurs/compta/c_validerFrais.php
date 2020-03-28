@@ -11,18 +11,21 @@
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
 
-$mois = filter_input(INPUT_GET, 'lstMois', FILTER_SANITIZE_STRING);
-$idVisiteur = filter_input(INPUT_GET, 'lstVisiteur', FILTER_SANITIZE_STRING);
+$mois = filter_input(INPUT_POST, 'mois', FILTER_SANITIZE_STRING);
+$idVisiteur = filter_input(INPUT_POST, 'visiteur', FILTER_SANITIZE_STRING);
 
 $lesVisiteurs = $pdo->getLesVisiteurs();
 if (!$idVisiteur) {
     $idVisiteur = $lesVisiteurs[0]['id'];
 }
 
+// Modification du mois en cours, suivant l
 $lesMois = $pdo->getLesMoisDisponibles($idVisiteur);
+if ($pdo->estPremierFraisMois($idVisiteur, $mois)) {
+    $mois = $pdo->dernierMoisSaisi($idVisiteur);
+}
 
 include 'vues/compta/v_listeVisiteursMois.php';
-
 switch ($action) {
 case 'validerMajFraisForfait':
     $lesFrais = filter_input(INPUT_POST, 'lesFrais', FILTER_DEFAULT, FILTER_FORCE_ARRAY);

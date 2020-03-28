@@ -32,14 +32,22 @@
                 $id = $unFraisHorsForfait['id'];
                 ?>  
                 <form method="post" 
-                    action="index.php?uc=validerFrais&action=validerMajFraisHorsForfait&lstMois=<?php 
-                        echo $mois ?>&lstVisiteur=<?php echo $idVisiteur ?>" role="form">
+                    action="index.php?uc=validerFrais&action=validerMajFraisHorsForfait"
+                    role="form">
 
-                        <div class="col-sm-3"><input name='dateFrais' class='form-control' value='<?php echo $date ?>'></div>
-                        <div class="col-sm-3"><input name='libelle' class='form-control' value='<?php echo $libelle ?>'></div>
-                        <div class="col-sm-3"><input name='montant' class='form-control' value='<?php echo $montant ?>'></div>
+                        <div class="col-sm-3">
+                            <input name='dateFrais' class='form-control' value='<?php echo $date ?>'>
+                        </div>
+                        <div class="col-sm-3">
+                            <input name='libelle' class='form-control' value='<?php echo $libelle ?>'>
+                        </div>
+                        <div class="col-sm-3">
+                            <input name='montant' class='form-control' value='<?php echo $montant ?>'>
+                        </div>
                         <div class="col-sm-3">
                             <input type='hidden' value='<?php echo $id ?>' name='id'>
+                            <input type='hidden' value='<?php echo $mois ?>' name='mois'>
+                            <input type='hidden' value='<?php echo $idVisiteur ?>' name='visiteur'>
                             <input type='submit' class='btn btn-success' value='Corriger'>
                             <input type='reset' class='btn btn-danger' value='Réinitialiser'>
                         </div>

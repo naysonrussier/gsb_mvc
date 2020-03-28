@@ -408,7 +408,7 @@ class PdoGsb
         $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
         $requetePrepare->bindParam(':unLibelle', $libelle, PDO::PARAM_STR);
         $requetePrepare->bindParam(':uneDateFr', $dateFr, PDO::PARAM_STR);
-        $requetePrepare->bindParam(':unMontant', $montant, PDO::PARAM_INT);
+        $requetePrepare->bindParam(':unMontant', $montant, PDO::PARAM_STR);
         $requetePrepare->execute();
     }
 
@@ -437,7 +437,7 @@ class PdoGsb
         );
         $requetePrepare->bindParam(':unLibelle', $libelle, PDO::PARAM_STR);
         $requetePrepare->bindParam(':uneDateFr', $dateFr, PDO::PARAM_STR);
-        $requetePrepare->bindParam(':unMontant', $montant, PDO::PARAM_INT);
+        $requetePrepare->bindParam(':unMontant', $montant, PDO::PARAM_STR);
         $requetePrepare->bindParam(':unId', $id, PDO::PARAM_INT);
         $requetePrepare->execute();
     }

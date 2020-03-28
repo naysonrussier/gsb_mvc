@@ -13,12 +13,11 @@
  */
 ?>
 <div class="row">
-    <form action="index.php?uc=validerFrais&action=validerVisiteurMois" 
-          method="get" role="form" class="form-inline">
-        <input type='hidden' value='validerFrais' name='uc'>
+    <form action="index.php?uc=validerFrais&action=selectionnerVisiteur" 
+          method="post" role="form" class="form-inline">
         <div class="form-group mb-2">
             <label for="lstVisiteurs" accesskey="n">Choisir le visiteur : </label>
-            <select id="lstVisiteurs" name="lstVisiteur" class="form-control" onchange="this.form.submit()">
+            <select id="lstVisiteurs" name="visiteur" class="form-control" onchange="this.form.submit()">
                 <?php
                 foreach ($lesVisiteurs as $unVisiteur) {
                     $visiteur = $unVisiteur['id'];
@@ -41,7 +40,7 @@
         </div>
         <div class="form-group mb-2">
             <label for="lstMois" accesskey="n">Mois : </label>
-            <select id="lstMois" name="lstMois" class="form-control" onchange="this.form.submit()">
+            <select id="lstMois" name="mois" class="form-control" onchange="this.form.submit()">
                 <?php
                 foreach ($lesMois as $unMois) {
                     $leMois = $unMois['mois'];
