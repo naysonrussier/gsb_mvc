@@ -25,12 +25,23 @@ if ($pdo->estPremierFraisMois($idVisiteur, $mois)) {
     $mois = $pdo->dernierMoisSaisi($idVisiteur);
 }
 
+// Récupération infos fiches
+$infoFiche = $pdo->getLesInfosFicheFrais($idVisiteur, $mois);
+$etatFiche = $infoFiche['idEtat'];
+$etatLibFiche = $infoFiche['libEtat'];
+
 $estPost = $_SERVER['REQUEST_METHOD'] === 'POST';
 
 // Clôture des fiches non clôturées
 $moisEnCours = getMois(date('d/m/Y'));
 $pdo->cloturerFicheFrais($moisEnCours);
 
+// Si l'état de la fiche n'est pas clôturé, bloquer la saisie
+if ($etatFiche != 'CL') {
+    $action = '';
+    ajouterErreur($etatLibFiche . ", il est ainsi impossible d'effectuer des modifications");
+    include 'vues/v_erreurs.php';
+}
 switch ($action) {
 case 'validerMajFraisForfait':
     if ($estPost) {
