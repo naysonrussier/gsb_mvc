@@ -24,14 +24,30 @@ switch ($action) {
         include 'vues/compta/v_listeFicheValidee.php';
         break;
     case 'mettreEnPaiementFiche':
-        $pdo->majEtatFicheFrais($idVisiteur, $mois, 'MP');
-        $succes = "Fiche de frais mise en paiement.";
-        include 'vues/v_succes.php';
+        $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $mois);
+        $etat = $lesInfosFicheFrais['idEtat'];
+        if ($etat == 'VA') {
+            $pdo->majEtatFicheFrais($idVisiteur, $mois, 'MP');
+            $succes = "Fiche de frais mise en paiement.";
+            include 'vues/v_succes.php';
+        } else {
+            ajouterErreur("Il n'est pas possible de mettre une fiche en paiement "
+                . "si elle n'est pas dans l'état validé.");
+            include 'vues/v_erreurs.php';
+        }
         break;
     case 'rembourserFrais':
-        $pdo->majEtatFicheFrais($idVisiteur, $mois, 'RB');
-        $succes = "Fiche de frais remboursée.";
-        include 'vues/v_succes.php';
+        $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $mois);
+        $etat = $lesInfosFicheFrais['idEtat'];
+        if ($etat == 'MP') {
+            $pdo->majEtatFicheFrais($idVisiteur, $mois, 'RB');
+            $succes = "Fiche de frais remboursée.";
+            include 'vues/v_succes.php';
+        } else {
+            ajouterErreur("Il n'est pas possible de rembourser une fiche "
+                . "si elle n'est pas dans l'état de mise en paiement.");
+            include 'vues/v_erreurs.php';
+        }
         break;
 }
 
