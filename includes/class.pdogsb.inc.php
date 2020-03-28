@@ -553,9 +553,12 @@ class PdoGsb
             . 'fichefrais.datemodif as dateModif,'
             . 'fichefrais.nbjustificatifs as nbJustificatifs, '
             . 'fichefrais.montantvalide as montantValide, '
-            . 'etat.libelle as libEtat '
+            . 'etat.libelle as libEtat, '
+            . 'visiteur.nom as nomVisiteur, '
+            . 'visiteur.prenom as prenomVisiteur '
             . 'FROM fichefrais '
             . 'INNER JOIN etat ON fichefrais.idetat = etat.id '
+            . 'INNER JOIN visiteur ON fichefrais.idvisiteur = visiteur.id '
             . 'WHERE fichefrais.idvisiteur = :unIdVisiteur '
             . 'AND fichefrais.mois = :unMois'
         );
@@ -564,6 +567,36 @@ class PdoGsb
         $requetePrepare->execute();
         $laLigne = $requetePrepare->fetch();
         return $laLigne;
+    }
+    
+    /**
+     * Retourne l'ensemble des fiches de frais validées ou en attente 
+     * de remboursement
+     * 
+     * @return un tableau avec des champs de jointure entre une fiche de frais
+     *          et la ligne d'état
+     */
+    public function getFichesFraisValidees()
+    {
+        
+        $requetePrepare = PdoGSB::$monPdo->prepare(
+            'SELECT fichefrais.idetat as idEtat, '
+            . 'fichefrais.datemodif as dateModif,'
+            . 'fichefrais.nbjustificatifs as nbJustificatifs, '
+            . 'fichefrais.montantvalide as montantValide, '
+            . 'fichefrais.idvisiteur as idVisiteur, '
+            . 'fichefrais.mois as mois, '
+            . 'visiteur.nom as nomVisiteur, '
+            . 'visiteur.prenom as prenomVisiteur, '
+            . 'etat.libelle as libEtat '
+            . 'FROM fichefrais '
+            . 'INNER JOIN etat ON fichefrais.idetat = etat.id '
+            . 'INNER JOIN visiteur ON fichefrais.idvisiteur = visiteur.id '
+            . 'WHERE fichefrais.idetat = "VA" OR fichefrais.idetat = "MP"'
+        );
+        $requetePrepare->execute();
+        $lesLigne = $requetePrepare->fetchAll();
+        return $lesLigne;
     }
 
     /**
