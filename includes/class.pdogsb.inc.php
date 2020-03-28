@@ -589,4 +589,18 @@ class PdoGsb
         $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
         $requetePrepare->execute();
     }
+    
+    /**
+     *  Clôturer toutes les fiches avant le mois passé en paramètres
+     * @param type $mois
+     */
+    public function cloturerFicheFrais($mois) {
+        $requetePrepare = PdoGSB::$monPdo->prepare(
+            'UPDATE ficheFrais '
+            . 'SET idetat = "CL", datemodif = now() '
+            . 'WHERE fichefrais.mois < :unMois AND fichefrais.idetat = "CR"'
+        );
+        $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
+        $requetePrepare->execute();
+    }
 }

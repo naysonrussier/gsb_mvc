@@ -19,13 +19,17 @@ if (!$idVisiteur) {
     $idVisiteur = $lesVisiteurs[0]['id'];
 }
 
-// Modification du mois en cours, suivant l
+// Modification du mois en cours, suivant le visiteur
 $lesMois = $pdo->getLesMoisDisponibles($idVisiteur);
 if ($pdo->estPremierFraisMois($idVisiteur, $mois)) {
     $mois = $pdo->dernierMoisSaisi($idVisiteur);
 }
 
 $estPost = $_SERVER['REQUEST_METHOD'] === 'POST';
+
+// Clôture des fiches non clôturées
+$moisEnCours = getMois(date('d/m/Y'));
+$pdo->cloturerFicheFrais($moisEnCours);
 
 switch ($action) {
 case 'validerMajFraisForfait':
