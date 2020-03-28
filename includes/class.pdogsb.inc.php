@@ -453,7 +453,7 @@ class PdoGsb
      *
      * @return null
      */
-    public function modifierFraisHorsForfait(
+    public function majFraisHorsForfait(
         $id,
         $libelle,
         $date,

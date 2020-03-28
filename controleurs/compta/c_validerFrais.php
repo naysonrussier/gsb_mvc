@@ -72,7 +72,7 @@ case 'refusFraisHorsFofrait':
     $libelle = 'REFUSE : ' . $frais['libelle'];
     $date = $frais['date'];
     $montant = $frais['montant'];
-    $pdo->modifierFraisHorsForfait($idFrais, $libelle, $date, $montant);
+    $pdo->majFraisHorsForfait($idFrais, $libelle, $date, $montant);
     
     $succes = 'Frais hors forfait refusé avec succés.';
     include 'vues/v_succes.php';
@@ -100,9 +100,10 @@ case 'reporterFraisHorsFofrait':
     $succes = 'Frais hors forfait reporté avec succés.';
     include 'vues/v_succes.php';
     break;
-case 'validerMajNbJustificatifs':
+case 'validerFrais':
     $nbJustificatifs = filter_input(INPUT_POST, 'nbJustificatifs', FILTER_SANITIZE_NUMBER_INT);
     $pdo->majNbJustificatifs($idVisiteur,$mois, $nbJustificatifs);
+    $pdo->majEtatFicheFrais($idVisiteur, $mois, 'VA');
     $succes = "La fiche a bien été validée.";
     include 'vues/v_succes.php';
 }
