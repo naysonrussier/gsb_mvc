@@ -32,6 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $lesFrais = filter_input(INPUT_POST, 'lesFrais', FILTER_DEFAULT, FILTER_FORCE_ARRAY);
         if (lesQteFraisValides($lesFrais)) {
             $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
+            $succes = "Les frais ont bien été enregistrés";
+            include 'vues/v_succes.php';
         } else {
             ajouterErreur('Les valeurs des frais doivent être numériques');
             include 'vues/v_erreurs.php';
@@ -54,11 +56,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $dateFrais,
                 $montant
             );
+            $succes = "Le frais hors forfait \"" . $libelle . "\" d'un montant de ". $montant ." € a bien été validé.";
+            include 'vues/v_succes.php';
         }
         break;
     case 'validerMajNbJustificatifs':
         $nbJustificatifs = filter_input(INPUT_POST, 'nbJustificatifs', FILTER_SANITIZE_NUMBER_INT);
         $pdo->majNbJustificatifs($idVisiteur,$mois, $nbJustificatifs);
+        $succes = "La fiche a bien été validée.";
+        include 'vues/v_succes.php';
     }
 }
 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);

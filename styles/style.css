@@ -2,6 +2,13 @@
     margin-top: 10px;
 }
 
+/* Class utilities */
+.mb {
+    margin-bottom: 15px;
+}
+.mt {
+    margin-top: 15px;
+}
 /* Page comptable, couleur Orange*/
 .container.comptable .nav a {
     color: #ff9600;
