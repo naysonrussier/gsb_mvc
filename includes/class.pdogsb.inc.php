@@ -416,7 +416,7 @@ class PdoGsb
      * @param String $idVisiteur ID du visiteur
      * @param String $mois       Mois sous la forme aaaamm
      * @param String $libelle    Libellé du frais
-     * @param String $date       Date du frais au format français jj//mm/aaaa
+     * @param String $date       Date du frais au format français jj/mm/aaaa
      * @param Float  $montant    Montant du frais
      *
      * @return null
@@ -635,5 +635,67 @@ class PdoGsb
         );
         $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
         $requetePrepare->execute();
+    }
+    
+    // Api functions
+    
+    /**
+     * Vérification des informations fournis, et retour de l'utilisateur + token
+     * 
+     * @param type $login
+     * @param type $mdp
+     * @return array
+     */
+    public function apiConnexion($login, $mdp) {
+        $utilisateur = $this->getInfosVisiteur($login, $mdp);
+        if (is_array($utilisateur)) {
+            $id = $utilisateur['id'];
+            $utilisateur['token'] = $this->apiGenererToken($id);
+        } else {
+            $utilisateur = array();
+            $utilisateur["token"] = "";
+        }
+        return $utilisateur;
+    }
+    
+    public function apiGetUtilisateurParToken($token) {
+        $requetePrepare = PdoGsb::$monPdo->prepare(
+            'SELECT visiteur.id AS id, visiteur.nom AS nom, '
+            . 'visiteur.prenom AS prenom, "visiteur" as type '
+            . 'FROM visiteur '
+            . 'WHERE visiteur.token=:unToken'
+        );
+        $requetePrepare->bindParam(':unToken', $token, PDO::PARAM_STR);
+        $requetePrepare->execute();
+        return $requetePrepare->fetch();
+    }
+    
+    public function apiGenererToken($id) {
+        $tokenExistant = true;
+        while($tokenExistant) {
+            $token = bin2hex(random_bytes(64));
+            $requetePrepare = PdoGsb::$monPdo->prepare(
+                'SELECT * '
+                . 'FROM visiteur '
+                . 'WHERE token = :unToken'
+            );
+            $requetePrepare->bindParam(':unToken', $token, PDO::PARAM_STR);
+            $requetePrepare->execute();
+            $resultat = $requetePrepare->fetch();
+            if (!is_array($resultat)) {
+                $tokenExistant = false;
+            }
+        }
+        // Insertion du token
+        $requetePrepare = PdoGsb::$monPdo->prepare(
+            'UPDATE visiteur '
+                . 'SET token=:unToken '
+                . 'WHERE id=:unId'
+        );
+        $requetePrepare->bindParam(':unToken', $token, PDO::PARAM_STR);
+        $requetePrepare->bindParam(':unId', $id, PDO::PARAM_STR);
+        
+        $requetePrepare->execute();
+        return $token;
     }
 }
