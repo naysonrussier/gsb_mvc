@@ -11,6 +11,10 @@
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
 
+// Clôture des fiches non clôturées
+$moisEnCours = getMois(date('d/m/Y'));
+$pdo->cloturerFicheFrais($moisEnCours);
+
 $mois = filter_input(INPUT_POST, 'mois', FILTER_SANITIZE_STRING);
 $idVisiteur = filter_input(INPUT_POST, 'visiteur', FILTER_SANITIZE_STRING);
 
@@ -32,9 +36,6 @@ $etatLibFiche = $infoFiche['libEtat'];
 
 $estPost = $_SERVER['REQUEST_METHOD'] === 'POST';
 
-// Clôture des fiches non clôturées
-$moisEnCours = getMois(date('d/m/Y'));
-$pdo->cloturerFicheFrais($moisEnCours);
 
 // Si l'état de la fiche n'est pas clôturé, bloquer la saisie
 if ($etatFiche != 'CL') {
