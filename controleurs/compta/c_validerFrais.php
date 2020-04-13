@@ -16,7 +16,7 @@ $moisEnCours = getMois(date('d/m/Y'));
 $pdo->cloturerFicheFrais($moisEnCours);
 
 $mois = filter_input(INPUT_POST, 'mois', FILTER_SANITIZE_STRING);
-if (!$idVisiteur) {
+if (!$idMois) {
     $mois = filter_input(INPUT_GET, 'mois', FILTER_SANITIZE_STRING);
 }
 $idVisiteur = filter_input(INPUT_POST, 'visiteur', FILTER_SANITIZE_STRING);
