@@ -612,7 +612,7 @@ class PdoGsb
     public function majEtatFicheFrais($idVisiteur, $mois, $etat)
     {
         $requetePrepare = PdoGSB::$monPdo->prepare(
-            'UPDATE ficheFrais '
+            'UPDATE fichefrais '
             . 'SET idetat = :unEtat, datemodif = now() '
             . 'WHERE fichefrais.idvisiteur = :unIdVisiteur '
             . 'AND fichefrais.mois = :unMois'
@@ -629,7 +629,7 @@ class PdoGsb
      */
     public function cloturerFicheFrais($mois) {
         $requetePrepare = PdoGSB::$monPdo->prepare(
-            'UPDATE ficheFrais '
+            'UPDATE fichefrais '
             . 'SET idetat = "CL", datemodif = now() '
             . 'WHERE fichefrais.mois < :unMois AND fichefrais.idetat = "CR"'
         );
