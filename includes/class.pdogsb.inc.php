@@ -228,7 +228,8 @@ class PdoGsb
         $requetePrepare = PdoGSB::$monPdo->prepare(
             'SELECT fraisforfait.id as idfrais, '
             . 'fraisforfait.libelle as libelle, '
-            . 'lignefraisforfait.quantite as quantite '
+            . 'lignefraisforfait.quantite as quantite, '
+            . 'fraisforfait.montant as montant '
             . 'FROM lignefraisforfait '
             . 'INNER JOIN fraisforfait '
             . 'ON fraisforfait.id = lignefraisforfait.idfraisforfait '
@@ -618,6 +619,21 @@ class PdoGsb
             . 'AND fichefrais.mois = :unMois'
         );
         $requetePrepare->bindParam(':unEtat', $etat, PDO::PARAM_STR);
+        $requetePrepare->bindParam(':unIdVisiteur', $idVisiteur, PDO::PARAM_STR);
+        $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
+        $requetePrepare->execute();
+    }
+    
+    public function majMontantFicheFrais($idVisiteur, $mois, $montant)
+    {
+        
+        $requetePrepare = PdoGSB::$monPdo->prepare(
+            'UPDATE fichefrais '
+            . 'SET montantvalide = :unMontant, datemodif = now() '
+            . 'WHERE fichefrais.idvisiteur = :unIdVisiteur '
+            . 'AND fichefrais.mois = :unMois'
+        );
+        $requetePrepare->bindParam(':unMontant', $montant);
         $requetePrepare->bindParam(':unIdVisiteur', $idVisiteur, PDO::PARAM_STR);
         $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
         $requetePrepare->execute();

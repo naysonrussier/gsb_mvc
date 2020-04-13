@@ -121,7 +121,20 @@ switch ($action) {
         break;
     case 'validerFrais':
         $nbJustificatifs = filter_input(INPUT_POST, 'nbJustificatifs', FILTER_SANITIZE_NUMBER_INT);
+        $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
+        $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $mois);
+        $montant = 0;
+        foreach ($lesFraisForfait as $unFraisForfait) {
+            $montant += $unFraisForfait['montant'] * $unFraisForfait['quantite'];
+        }
+        foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
+            if (substr($unFraisHorsForfait['libelle'], 0, 6) != 'REFUSE') {
+                $montant += $unFraisHorsForfait['montant'];
+            }
+        }
+        echo $montant;
         $pdo->majNbJustificatifs($idVisiteur, $mois, $nbJustificatifs);
+        $pdo->majMontantFicheFrais($idVisiteur, $mois, $montant);
         $pdo->majEtatFicheFrais($idVisiteur, $mois, 'VA');
         $succes = "La fiche a bien été validée.";
         include 'vues/v_succes.php';
