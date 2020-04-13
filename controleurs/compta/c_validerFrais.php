@@ -51,6 +51,7 @@ if ($etatFiche != 'CL') {
 }
 switch ($action) {
     case 'validerMajFraisForfait':
+        $lesFrais = filter_input(INPUT_POST, 'lesFrais', FILTER_DEFAULT, FILTER_FORCE_ARRAY);
         if ($estPost) {
             if (lesQteFraisValides($lesFrais)) {
                 $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
