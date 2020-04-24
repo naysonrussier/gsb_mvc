@@ -658,9 +658,9 @@ class PdoGsb
     /**
      * Vérification des informations fournis, et retour de l'utilisateur + token
      * 
-     * @param type $login
-     * @param type $mdp
-     * @return array
+     * @param String $login
+     * @param String $mdp
+     * @return tableau comprenant les informations de l'utilisateur authentifié
      */
     public function apiConnexion($login, $mdp) {
         $utilisateur = $this->getInfosVisiteur($login, $mdp);
@@ -674,6 +674,12 @@ class PdoGsb
         return $utilisateur;
     }
     
+    /**
+     * Permet de rechercher un visiteur grâce à un token unique
+     * 
+     * @param String $token
+     * @return tableau comprenant les informations de l'utilisateur authentifié
+     */
     public function apiGetUtilisateurParToken($token) {
         $requetePrepare = PdoGsb::$monPdo->prepare(
             'SELECT visiteur.id AS id, visiteur.nom AS nom, '
@@ -686,6 +692,13 @@ class PdoGsb
         return $requetePrepare->fetch();
     }
     
+    /**
+     * Permet de générer un token unique, non existant dans la base
+     * et met à jour le visiteur concerné
+     * 
+     * @param Integer $id
+     * @return String token unique
+     */
     public function apiGenererToken($id) {
         $tokenExistant = true;
         while($tokenExistant) {
@@ -702,7 +715,7 @@ class PdoGsb
                 $tokenExistant = false;
             }
         }
-        // Insertion du token
+        // Insertion du token dans la base de données
         $requetePrepare = PdoGsb::$monPdo->prepare(
             'UPDATE visiteur '
                 . 'SET token=:unToken '
